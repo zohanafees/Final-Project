@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Country Details</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <nav>
+        <a href="index.html" class="logo">
+            <img src="assets/OIP.jpg" alt="Travel Logo">
+            <span style="font-family: 'Moralana'; font-size: 22px;">FlyBeyond Tours</span>
+        </a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="destinations.html">Destinations</a>
+            <a href="packages.html">Packages</a>
+            <a href="booking.html">Booking</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    </nav>
+
+    <section id="details">
+        <div id="loader">Loading country details...</div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <p>© 2025 Travel Guide. All Rights Reserved.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="destinations.html">Destinations</a></li>
+                    <li><a href="packages.html">Packages</a></li>
+                    <li><a href="booking.html">Booking</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section social-icons">
+                <h3>Follow Us</h3>
+                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-pinterest"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p><i class="fa-brands fa-gratipay"></i> Designed By Smart Developers <i class="fa-brands fa-gratipay"></i></p>
+        </div>
+    </footer>
+
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const countryName = params.get('country');
+        const detailsSection = document.getElementById('details');
+
+        fetch('https://restcountries.com/v3.1/all?fields=name,capital,region,subregion,population,flags,currencies,languages')
+            .then(res => res.json())
+            .then(data => {
+                const country = data.find(c => c.name.common === countryName);
+                if (!country) { detailsSection.innerHTML = '<p>Country details not found.</p>'; return; }
+                detailsSection.innerHTML = `
+    <div class="card" style="max-width: 600px; margin: 0 auto; padding: 30px;">
+      <img src="${country.flags.png}" style="width: 100%; max-width: 500px; height: auto; object-fit: cover; border-radius: 8px;">
+      <h2 style="margin: 20px 0;">${country.name.common}</h2>
+      <div style="text-align: left; display: inline-block;">
+          <p><strong>Capital:</strong> ${country.capital ? country.capital[0] : 'No capital'}</p>
+          <p><strong>Region:</strong> ${country.region}</p>
+          <p><strong>Subregion:</strong> ${country.subregion || 'N/A'}</p>
+          <p><strong>Population:</strong> ${country.population.toLocaleString()}</p>
+          <p><strong>Currencies:</strong> ${country.currencies ? Object.values(country.currencies).map(c => c.name).join(', ') : 'N/A'}</p>
+          <p><strong>Languages:</strong> ${country.languages ? Object.values(country.languages).join(', ') : 'N/A'}</p>
+      </div>
+      <br>
+      <a href="booking.html?country=${encodeURIComponent(country.name.common)}" style="display: inline-block; margin-top: 20px;"><button>Book Trip</button></a>
+    </div>
+  `;
+            });
+    </script>
+</body>
+
+</html>

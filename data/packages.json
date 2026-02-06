@@ -1,0 +1,44 @@
+[
+    {
+        "id": 1,
+        "name": "Paris Getaway",
+        "price": 1200,
+        "days": 5,
+        "country": "France"
+    },
+    {
+        "id": 2,
+        "name": "Dubai Tour",
+        "price": 900,
+        "days": 4,
+        "country": "United Arab Emirates"
+    },
+    {
+        "id": 3,
+        "name": "Bangkok Adventure",
+        "price": 700,
+        "days": 6,
+        "country": "Thailand"
+    },
+    {
+        "id": 4,
+        "name": "Cape Town Safari",
+        "price": 1500,
+        "days": 7,
+        "country": "South Africa"
+    },
+    {
+        "id": 5,
+        "name": "Rome Explorer",
+        "price": 1100,
+        "days": 5,
+        "country": "Italy"
+    },
+    {
+        "id": 6,
+        "name": "Tokyo Highlights",
+        "price": 1300,
+        "days": 6,
+        "country": "Japan"
+    }
+]
